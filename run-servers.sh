@@ -35,7 +35,7 @@ for i in `seq 1 $NUM_SERVERS`; do
 		sleep .1
 	fi
 done
-
+  
 #for i in `seq 1 $NUM_CLIENT_MACHINES`; do
 #	mc=`expr $i + 1`
 #	client_id=`expr $mc - 2`
