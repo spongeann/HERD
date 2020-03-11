@@ -225,7 +225,21 @@ void print_ht_index();
 
 void nano_sleep(int ns);
 inline long long get_cycles();
+inline long long get_cycles()
+{
 
+	unsigned low, high;
+
+	unsigned long long val;
+
+	asm volatile ("rdtsc" : "=a" (low), "=d" (high));
+
+	val = high;
+
+	val = (val << 32) | low;
+
+	return val;
+}
 void poll_conn_cq(int num_completions, struct ctrl_blk *cb, int cq_num);
 void poll_dgram_cq(int num_completions, struct ctrl_blk *cb, int cq_num);
 
@@ -235,7 +249,14 @@ long long* gen_key_corpus(int cn);
 void init_ht(struct ctrl_blk *cb);
 int is_roce(void);
 inline uint32_t fastrand(uint64_t* seed);
+inline uint32_t fastrand(uint64_t* seed)
+{
 
+    *seed = *seed * 1103515245 + 12345;
+
+    return (uint32_t)(*seed >> 32);
+
+}
 #define LL long long
 #define KEY_TO_BUCKET(k) ((int) (k >> 16) & NUM_IDX_BKTS_)		// 3 bytes (up to 16 Mi buckets)
 #define KEY_TO_TAG(k) ((int) (k & 0xffff))						// 2 bytes
