@@ -1,8 +1,6 @@
 # Action: 
 #	1. Run server processes on the server machine
-#	2. ssh into client machines and run the run-machine.sh script
-
-			# Remove hugepages
+#	2. ssh into client machines and run the run-machine.sh
 export ROCE=0			# Don't use RoCE on Apt
 export APT=1
 
